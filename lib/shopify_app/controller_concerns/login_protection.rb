@@ -17,12 +17,15 @@ module ShopifyApp
     ACCESS_TOKEN_REQUIRED_HEADER = 'X-Shopify-API-Request-Failure-Unauthorized'
 
     def activate_shopify_session
+      puts 'ACTIVATING SESSION'
       if user_session_expected? && user_session.blank?
         signal_access_token_required
+          puts 'ACTIVATING SESSION FIRST CONDITIONAL'
         return redirect_to_login
       end
 
       puts "Activate Shopify Session Token: #{ current_shopify_session&.token }"
+      puts 'ACTIVATING SESSION BLANK SHOPIFY SESSION'
       return redirect_to_login if current_shopify_session.blank?
 
       clear_top_level_oauth_cookie
