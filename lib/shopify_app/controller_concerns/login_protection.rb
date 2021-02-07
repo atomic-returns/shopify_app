@@ -77,13 +77,15 @@ module ShopifyApp
       if session[:user_session].present? && params[:session].present? # session data was sent/stored correctly
         clear_session = session[:user_session] != params[:session] # current user is different from stored user
       end
-
+      puts "FIRST CHECK #{ clear_session }"
+      
       if current_shopify_session &&
         params[:shop] && params[:shop].is_a?(String) &&
         (current_shopify_session.domain != params[:shop])
         clear_session = true
       end
-
+      puts "SECOND CHECK #{ clear_session }"
+  
       if clear_session
         clear_shopify_session
         redirect_to_login
@@ -127,6 +129,7 @@ module ShopifyApp
     end
 
     def clear_shopify_session
+      puts "HELLO I AM CLEARNING THE SESSION"
       session[:shop_id] = nil
       session[:user_id] = nil
       session[:shopify_domain] = nil
