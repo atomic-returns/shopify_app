@@ -22,6 +22,7 @@ module ShopifyApp
         return redirect_to_login
       end
 
+      puts "Activate Shopify Session Token: #{ current_shopify_session&.token }"
       return redirect_to_login if current_shopify_session.blank?
 
       clear_top_level_oauth_cookie
