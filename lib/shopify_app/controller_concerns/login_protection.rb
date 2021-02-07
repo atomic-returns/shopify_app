@@ -75,6 +75,8 @@ module ShopifyApp
 
     def login_again_if_different_user_or_shop
       if session[:user_session].present? && params[:session].present? # session data was sent/stored correctly
+        puts "USER SESSION: #{ session[:user_session]  }"
+        puts "SESSION: #{ params[:session] }"
         clear_session = session[:user_session] != params[:session] # current user is different from stored user
       end
       puts "FIRST CHECK #{ clear_session }"
